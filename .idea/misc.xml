@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.3614583333333333" />
+        <entry key="../../Library/Android/sdk/platforms/android-29/data/res/layout/activity_list_item.xml" value="0.18342391304347827" />
+        <entry key="app/src/main/res/drawable-v24/bg_selector.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable-v24/btn_pressed.xml" value="0.1975" />
+        <entry key="app/src/main/res/drawable-v24/sel_check.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/btn_normal.xml" value="0.1975" />
+        <entry key="app/src/main/res/drawable/ic_app.xml" value="0.259" />
+        <entry key="app/src/main/res/drawable/ic_keyborad.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/ic_smell.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/item_shape_radio_c.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rec_item.xml" value="0.1345" />
+        <entry key="app/src/main/res/layout-w1240dp/activity_mutil_select.xml" value="0.2650331264837998" />
+        <entry key="app/src/main/res/layout-w1240dp/content_scrolling.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-w1240dp/emoji_two.xml" value="0.15294511378848727" />
+        <entry key="app/src/main/res/layout-w936dp/activity_mutil_select.xml" value="0.13515625" />
+        <entry key="app/src/main/res/layout-w936dp/activity_single_select.xml" value="0.13515625" />
+        <entry key="app/src/main/res/layout-w936dp/content_scrolling.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-w936dp/item_mutil_select.xml" value="0.13515625" />
+        <entry key="app/src/main/res/layout/activity_emoji.xml" value="0.18342391304347827" />
+        <entry key="app/src/main/res/layout/activity_first.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_fourth.xml" value="0.18020833333333333" />
+        <entry key="app/src/main/res/layout/activity_layout_demo.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/activity_list_view.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.31710968017578123" />
+        <entry key="app/src/main/res/layout/activity_message.xml" value="0.205287109375" />
+        <entry key="app/src/main/res/layout/activity_rec_select.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_recycler_view.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/activity_recycler_view_horizontal.xml" value="0.16878356933593752" />
+        <entry key="app/src/main/res/layout/activity_recycler_view_sgactivity.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/activity_scrolling.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_second.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_single_select.xml" value="0.18020833333333333" />
+        <entry key="app/src/main/res/layout/activity_third.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_uiwidget.xml" value="0.31023550724637683" />
+        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.12386018237082067" />
+        <entry key="app/src/main/res/layout/emoji_fragment.xml" value="0.18342391304347827" />
+        <entry key="app/src/main/res/layout/emoji_icon_item.xml" value="0.46699676513671884" />
+        <entry key="app/src/main/res/layout/emoji_one.xml" value="0.18342391304347827" />
+        <entry key="app/src/main/res/layout/emoji_two.xml" value="0.18342391304347827" />
+        <entry key="app/src/main/res/layout/emoji_viewpager_item.xml" value="0.18342391304347827" />
+        <entry key="app/src/main/res/layout/emojimini_item.xml" value="0.7741770868716032" />
+        <entry key="app/src/main/res/layout/fragment_emoji_one.xml" value="0.10023498535156247" />
+        <entry key="app/src/main/res/layout/listview_demo_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/msg_left_item.xml" value="0.5664804469273743" />
+        <entry key="app/src/main/res/layout/msg_right_item.xml" value="0.7666652737653388" />
+        <entry key="app/src/main/res/layout/rec_item.xml" value="0.78553466796875" />
+        <entry key="app/src/main/res/layout/recyclerview_horizontal_item.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/recyclerview_sg_item.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/title.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/viewpage2_item.xml" value="0.18342391304347827" />
+        <entry key="app/src/main/res/menu/main.xml" value="0.22" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
