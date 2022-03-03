@@ -1,6 +1,10 @@
 package com.example.myapplication.activity
 
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.os.*
 import android.text.Editable
@@ -13,6 +17,7 @@ import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.helper.widget.MotionEffect.TAG
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -64,6 +69,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
     var emoji = false //记录上次
     lateinit var el: LinearLayout
     lateinit var input: RelativeLayout
+    lateinit var manager: NotificationManager
 
 
     //接收到消息
@@ -127,6 +133,8 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
         initFragment()//初始化，表情选择的 fragment 页面
         choseEmoji()
 
+        //notification
+        initNotification()
 
     }
 
@@ -202,6 +210,9 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
 
                 if (msg.type == 1 && msg.author != author) {
                     Utils.utilToast(this@MessageActivity, "收到消息 : $content")
+
+                    //notification
+                    createNotification(msg.content, msg.author)
 
                     val ms = Msg(msg.content, Msg.TYPE_RECEIVED, author)
                     msgList.add(ms)
@@ -326,6 +337,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
     /**
      * recyclerView触摸监听
      * */
+    @SuppressLint("ClickableViewAccessibility")
     fun touchRecycler() {
         binding.messageRecyclerview.setOnTouchListener(object : View.OnTouchListener{
             @SuppressLint("ClickableViewAccessibility")
@@ -583,6 +595,31 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
 
 
         }
+    }
+
+    /**
+     * init notification
+     * */
+    fun initNotification() {
+        manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager//
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel("normal", "Normal", NotificationManager.IMPORTANCE_DEFAULT)
+            manager.createNotificationChannel(channel)
+        }
+    }
+
+
+    //normal notification
+    fun createNotification(author: String, msg: String){
+
+        val notification = NotificationCompat.Builder(this, "normal")
+            .setContentTitle(author)
+            .setContentText(msg)
+            .setSmallIcon(R.drawable.androidstudio)
+            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.androidstudio))
+            .build()
+
+        manager.notify(1, notification)
     }
 
 
