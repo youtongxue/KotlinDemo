@@ -28,7 +28,8 @@
         <activity
             android:name="com.example.myapplication.activity.MessageActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTask"/>
         <activity
             android:name="com.example.myapplication.activity.RecyclerViewSGActivity"
             android:exported="false" />
