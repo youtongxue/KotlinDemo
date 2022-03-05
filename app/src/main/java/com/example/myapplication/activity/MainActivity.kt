@@ -167,6 +167,12 @@ class MainActivity : BaseActivity() {
             startActivity(intent)
         }
 
+        //fragmentDemo
+        binding.buttonFragment.setOnClickListener {
+            val intent = Intent(this, FragmentDemoActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
 

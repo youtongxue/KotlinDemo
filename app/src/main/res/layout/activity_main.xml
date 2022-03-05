@@ -366,6 +366,21 @@
                     android:layout_marginTop="8dp"
                     android:text="Emoji"
                     android:textAllCaps="false" />
+
+                <TextView
+                    android:id="@+id/textView32"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                    android:text="Fragment" />
+
+                <Button
+                    android:id="@+id/button_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:text="Fragment Demo"
+                    android:textAllCaps="false" />
             </LinearLayout>
 
         </LinearLayout>

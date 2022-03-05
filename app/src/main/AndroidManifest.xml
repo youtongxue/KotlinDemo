@@ -14,10 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name="com.example.myapplication.activity.EmojiActivity"
+            android:name=".activity.FragmentDemoActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.myapplication.activity.RecSelectActivity"
+            android:name=".activity.EmojiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.RecSelectActivity"
             android:exported="false" />
         <activity
             android:name=".activity.SingleSelectActivity"
@@ -26,48 +29,48 @@
             android:name=".activity.FourthActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.myapplication.activity.MessageActivity"
+            android:name=".activity.MessageActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.example.myapplication.activity.RecyclerViewSGActivity"
+            android:name=".activity.RecyclerViewSGActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.myapplication.activity.RecyclerViewHorizontalActivity"
+            android:name=".activity.RecyclerViewHorizontalActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.myapplication.activity.RecyclerViewActivity"
+            android:name=".activity.RecyclerViewActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.myapplication.activity.ListViewActivity"
+            android:name=".activity.ListViewActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.myapplication.activity.LayoutDemoActivity"
+            android:name=".activity.LayoutDemoActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.myapplication.UIWidgetActivity"
+            android:name=".UIWidgetActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.myapplication.activity.ThirdActivity"
+            android:name=".activity.ThirdActivity"
             android:exported="false"
             android:label="Third Activity" />
         <activity
-            android:name="com.example.myapplication.activity.FirstActivity"
+            android:name=".activity.FirstActivity"
             android:exported="false"
             android:label="First Activity"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.example.myapplication.activity.SecondActivity"
+            android:name=".activity.SecondActivity"
             android:exported="false"
             android:label="Second activity" />
         <activity
-            android:name="com.example.myapplication.activity.ScrollingActivity"
+            android:name=".activity.ScrollingActivity"
             android:exported="false"
             android:label="Scrolling Activity"
             android:theme="@style/Theme.MyApplication.NoActionBar" />
         <activity
-            android:name="com.example.myapplication.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true"
             android:label="Kotlin">
             <intent-filter>

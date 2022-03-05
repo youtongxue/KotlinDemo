@@ -24,6 +24,7 @@
         <entry key="app/src/main/res/layout/activity_emoji.xml" value="0.18342391304347827" />
         <entry key="app/src/main/res/layout/activity_first.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_fourth.xml" value="0.18020833333333333" />
+        <entry key="app/src/main/res/layout/activity_fragment_demo.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_layout_demo.xml" value="0.33177083333333335" />
         <entry key="app/src/main/res/layout/activity_list_view.xml" value="0.33177083333333335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31710968017578123" />
@@ -37,6 +38,7 @@
         <entry key="app/src/main/res/layout/activity_single_select.xml" value="0.18020833333333333" />
         <entry key="app/src/main/res/layout/activity_third.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_uiwidget.xml" value="0.31023550724637683" />
+        <entry key="app/src/main/res/layout/another_right_fragment.xml" value="0.12708333333333333" />
         <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.12386018237082067" />
         <entry key="app/src/main/res/layout/emoji_fragment.xml" value="0.18342391304347827" />
         <entry key="app/src/main/res/layout/emoji_icon_item.xml" value="0.46699676513671884" />
@@ -45,12 +47,14 @@
         <entry key="app/src/main/res/layout/emoji_viewpager_item.xml" value="0.18342391304347827" />
         <entry key="app/src/main/res/layout/emojimini_item.xml" value="0.7741770868716032" />
         <entry key="app/src/main/res/layout/fragment_emoji_one.xml" value="0.10023498535156247" />
+        <entry key="app/src/main/res/layout/left_fragment.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/listview_demo_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/msg_left_item.xml" value="0.5664804469273743" />
         <entry key="app/src/main/res/layout/msg_right_item.xml" value="0.7666652737653388" />
         <entry key="app/src/main/res/layout/rec_item.xml" value="0.78553466796875" />
         <entry key="app/src/main/res/layout/recyclerview_horizontal_item.xml" value="0.33177083333333335" />
         <entry key="app/src/main/res/layout/recyclerview_sg_item.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/right_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/title.xml" value="0.33177083333333335" />
         <entry key="app/src/main/res/layout/viewpage2_item.xml" value="0.18342391304347827" />
         <entry key="app/src/main/res/menu/main.xml" value="0.22" />
