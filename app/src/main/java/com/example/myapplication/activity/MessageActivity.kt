@@ -120,7 +120,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
          * @Description 初始化，连接， 界面
          * */
         initMsg() //本地消息
-        MqttInit() //Mqtt连接
+        mqttInit() //Mqtt连接
         binding.cardMessageSend.visibility = View.GONE //设置 发送 按钮默认隐藏
         inputEdit() // 文本输入框状态监听
         initKeyBord() //键盘监听
@@ -185,15 +185,15 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
 
 
     //消息数据
-    fun initMsg() {
+    private fun initMsg() {
         val msg1 = Msg("Hello, nice to meet you!", Msg.TYPE_RECEIVED, author)
         msgList.add(msg1)
     }
 
     /**
-     * mqtt test
+     * mqtt init
      */
-    fun MqttInit() {
+    private fun mqttInit() {
         /* 创建MqttConnectOptions对象并配置username和password */
         val mqttConnectOptions = MqttConnectOptions()
         mqttConnectOptions.isCleanSession = false //告诉服务器，断开链接时，不要清除session
@@ -222,7 +222,8 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
                 if (msg.type == 1 && msg.author != author) {
                     Utils.utilToast(this@MessageActivity, "收到消息 : $content")
 
-                    //notification
+                    //notification 判断当前Activity是在前台，为显示状态，场景是如果当前为onResume状态则不显示悬浮窗通知消息，但是这儿在onResume生命周期中设置boolean变量有Bug
+                    //需要改成判断当前Activity是否在前台显示
                     if (displayNotification){
                         createNotification(msg.content, msg.author)
                     }
@@ -283,7 +284,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
      * 向默认的主题发布消息
      * @param payload 消息载荷
      */
-    fun publishMessage(payload: String) {
+    private fun publishMessage(payload: String) {
         try {
             if (!mqttAndroidClient.isConnected) {
                 mqttAndroidClient.connect()
@@ -309,7 +310,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
     /**
      * @Description inputEditText 组件的输入状态监听
      * */
-    fun inputEdit() {
+    private fun inputEdit() {
         binding.EditTextTextMessage.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -326,8 +327,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
                     //将dp 转换为 px 代码动态设置 输入控件 的 右 margin值
                     val px = Utils.dp2px(this@MessageActivity, 84.0)
                     val cardInput = binding.cardInput
-                    val params: RelativeLayout.LayoutParams =
-                        cardInput.getLayoutParams() as RelativeLayout.LayoutParams
+                    val params: RelativeLayout.LayoutParams = cardInput.layoutParams as RelativeLayout.LayoutParams
                     //params.addRule(RelativeLayout.RIGHT_OF, R.id.imageView_more)
                     params.rightMargin = px.toInt()
                     cardInput.layoutParams = params //使layout更新
@@ -337,8 +337,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
                     binding.imageViewMore.visibility = View.VISIBLE
 
                     val cardInput = binding.cardInput
-                    val params: RelativeLayout.LayoutParams =
-                        cardInput.getLayoutParams() as RelativeLayout.LayoutParams
+                    val params: RelativeLayout.LayoutParams = cardInput.layoutParams as RelativeLayout.LayoutParams
                     params.rightMargin = 0
                     cardInput.layoutParams = params //使layout更新
 
@@ -366,7 +365,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
         })
     }
 
-    fun initKeyBord() {
+    private fun initKeyBord() {
         val keyBoardListenerHelper = KeyBoardListenerHelper(this)
         keyBoardListenerHelper.setOnKeyBoardChangeListener(OnKeyBoardChangeListener { isShow, keyBoardHeight ->
             //此处可以根据是否显示软键盘，以及软键盘的高度处理逻辑
@@ -383,26 +382,24 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
                     if (emoji) {
                         Utils.utilToast(this, " emoji : 调用")
                         val params: RelativeLayout.LayoutParams =
-                            el.getLayoutParams() as RelativeLayout.LayoutParams
+                            el.layoutParams as RelativeLayout.LayoutParams
                         params.bottomMargin = -(Utils.dp2px(this, 340.5).toInt())
                         el.layoutParams = params //使layout更新
                         emoji = false
                     }
                     if (!pull) {
-
+                        //更新软键盘的高度,以及状态
                         keyBordH = keyBoardHeight
                         pull = true
-                        //down = false
                         Utils.utilToast(this, "键盘弹出 ： +$keyBoardHeight")
 
                         //拉起布局,输入框
-                        val params: RelativeLayout.LayoutParams =
-                            input.getLayoutParams() as RelativeLayout.LayoutParams
+                        val params: RelativeLayout.LayoutParams = input.layoutParams as RelativeLayout.LayoutParams
                         //params.addRule(RelativeLayout.RIGHT_OF, R.id.imageView_more)
                         params.bottomMargin = keyBoardHeight
                         input.layoutParams = params //使layout更新
-                        pull = true
 
+                        //当前软键盘弹起时，将recyclerView 滑动到最低部
                         binding.messageRecyclerview.smoothScrollToPosition(msgList.size)
                     }
                 }
@@ -419,8 +416,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
                     //键盘展开，点击表情选择
                     if (!emoji) {
                         //收起input输入框
-                        val params: RelativeLayout.LayoutParams =
-                            input.getLayoutParams() as RelativeLayout.LayoutParams
+                        val params: RelativeLayout.LayoutParams = input.layoutParams as RelativeLayout.LayoutParams
                         //params.addRule(RelativeLayout.RIGHT_OF, R.id.imageView_more)
                         params.bottomMargin = 0
                         input.layoutParams = params //使layout更新
@@ -439,7 +435,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
      * 获取状态栏高度，设置layout的margin——top值
      *
      */
-    fun setMargin() {
+    private fun setMargin() {
         //获取状态栏高度
         var statusBarHeight1 = 0
         //获取status_bar_height资源的ID
@@ -451,8 +447,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
         Log.e("TAG", "方法1状态栏高度:>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$statusBarHeight1")
 
         val title = binding.relativeLayout2
-        val params: ConstraintLayout.LayoutParams =
-            title.getLayoutParams() as ConstraintLayout.LayoutParams
+        val params: ConstraintLayout.LayoutParams = title.layoutParams as ConstraintLayout.LayoutParams
         //params.addRule(RelativeLayout.RIGHT_OF, R.id.imageView_more)
         params.topMargin = statusBarHeight1
         title.layoutParams = params //使layout更新
@@ -461,7 +456,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
     /**
      * 设置状态栏状态，颜色，底部虚拟导航栏颜色
      */
-    fun clear() {
+    private fun clear() {
         ImmersionBar.with(this)
             .statusBarColor(R.color.white)
             .navigationBarColor(R.color.white)
@@ -470,7 +465,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
 
         //隐藏action bar
         val actionBar = supportActionBar!!
-        actionBar!!.hide()
+        actionBar.hide()
     }
 
 
@@ -481,8 +476,8 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
 
     override fun onResume() {
         //focusable
-        binding.cardInput.setFocusable(true)
-        binding.cardInput.setFocusableInTouchMode(true)
+        binding.cardInput.isFocusable = true
+        binding.cardInput.isFocusableInTouchMode = true
         binding.cardInput.requestFocus()
 
         //set the displayNotification status
@@ -508,7 +503,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
      * @Description 表情选择
      * */
     //初始化底部 emoji 预览数据
-    fun initEmojiMini() {
+    private fun initEmojiMini() {
         //设置 EmojiMiniRecyclerView的 布局方式（方向）
         val layManager = LinearLayoutManager(this)//实例化 LayoutManager
         layManager.orientation = LinearLayoutManager.HORIZONTAL
@@ -528,7 +523,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
         emojiMiniList.add(getDrawable(R.drawable.ic_watermelon)!!)
         emojiMiniList.add(getDrawable(R.drawable.ic_banana)!!)
         val adapter = EmojiMiniAdapter(this, emojiMiniList)
-        binding.emojiminiRcy.setAdapter(adapter)
+        binding.emojiminiRcy.adapter = adapter
 
         //RecyclerView Item刷新数据动画
         //(recyclerView.itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false//取消切换动画
@@ -564,7 +559,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
     }
 
     //初始化，表情选择的 fragment 页面
-    fun initFragment() {
+    private fun initFragment() {
         val list: MutableList<Fragment> = ArrayList()
         list.add(EmojiOneFragment())
         list.add(EmojiTwoFragment())
@@ -580,7 +575,7 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
             }
         }
         binding.emojiViewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        binding.emojiViewpager.setAdapter(adapter) //把适配器添加给ViewPager2
+        binding.emojiViewpager.adapter = adapter //把适配器添加给ViewPager2
     }
 
     //选择某个表情的监听
@@ -590,52 +585,50 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
     }
 
     //是否弹出选择表情
-    fun choseEmoji() {
-        val params: RelativeLayout.LayoutParams =
-            el.getLayoutParams() as RelativeLayout.LayoutParams
+    private fun choseEmoji() {
+        val params: RelativeLayout.LayoutParams = el.layoutParams as RelativeLayout.LayoutParams
         params.bottomMargin = -(Utils.dp2px(this, 340.5).toInt())
         el.layoutParams = params //使layout更新
         emoji = false
+
         binding.imageViewSmell.setOnClickListener {
             Utils.utilToast(this, "点击表情 键盘：$pull emoji ： $emoji")
-//            if (!pull){
             Keybords.closeKeybord(binding.EditTextTextMessage, this)
             pull = false
-            //down = true
+
+            //判断点击表情按钮的时候，emoji面板是否显示
             if (!emoji) {
                 Utils.utilToast(this, "拉起 emoji")
+                emoji = true
 
-                //拉起布局,输入框
-                val param: RelativeLayout.LayoutParams =
-                    input.getLayoutParams() as RelativeLayout.LayoutParams
+                //当emoji选项面板弹出时,输入框拉更新底部边距值
+                val param: RelativeLayout.LayoutParams = input.layoutParams as RelativeLayout.LayoutParams
                 //params.addRule(RelativeLayout.RIGHT_OF, R.id.imageView_more)
                 param.bottomMargin = Utils.dp2px(this, 340.5).toInt()
                 input.layoutParams = param //使layout更新
 
-
+                //将表情选择面板的底部边距设置为0，及显示
                 params.bottomMargin = 0
                 el.layoutParams = params //使layout更新
-                emoji = true
-
+                //更改表情 按钮 图标
                 binding.imageViewSmell.setImageDrawable(getDrawable(R.drawable.ic_keyborad))
             } else {
-                Keybords.openKeybord(binding.EditTextTextMessage, this)
+
                 emoji = false
+                Keybords.openKeybord(binding.EditTextTextMessage, this)
                 params.bottomMargin = -(Utils.dp2px(this, 340.5).toInt())
                 el.layoutParams = params //使layout更新
-                emoji = false
-
                 binding.imageViewSmell.setImageDrawable(getDrawable(R.drawable.ic_smell))
+
             }
-
-
         }
     }
 
     /**
      * init notification
+     * @Description app 状态栏通知部分
      * */
-    fun initNotification() {
+    private fun initNotification() {
         manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager//get Notification manager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel("normal", "Normal", NotificationManager.IMPORTANCE_DEFAULT)
@@ -646,13 +639,14 @@ open class MessageActivity : AppCompatActivity(), View.OnClickListener, EmojiInt
 
 
     //normal notification
-    fun createNotification(author: String, msg: String) {
+    private fun createNotification(author: String, msg: String) {
         //click the notification intent to activity
         val intent = Intent(this, MessageActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
         //here have a problem that the set icon LargeIcon can not display, and the float style notification can not display too
 
+        //这儿有一个bug 设置通知的图标不会显示
         val notification = NotificationCompat.Builder(this, "important")
             .setContentTitle(msg)
             .setContentText(author)
